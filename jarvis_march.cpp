@@ -10,15 +10,15 @@ using namespace std;
 
 int main(){
 
-  List<Point> points;
-  points.add(*(new Point(0,3)));
+  List<Point> points = make_list("datasets/1.csv");
+  /*points.add(*(new Point(0,3)));
   points.add(*(new Point(1,1)));
   points.add(*(new Point(2,2)));
   points.add(*(new Point(4,4)));
   points.add(*(new Point(0,0)));
   points.add(*(new Point(1,2)));
   points.add(*(new Point(3,1)));
-  points.add(*(new Point(3,3)));
+  points.add(*(new Point(3,3)));*/
 
   if(points.size() < 3){
 
@@ -44,6 +44,8 @@ int main(){
        p = q;
 
   }while(p != l);
+
+  make_result(hull,1);
 
   hull.print();
   cout<<endl;
