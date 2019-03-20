@@ -11,7 +11,7 @@
 using namespace std;
 
 void make_result(List<Point> list,int dataset_id){
-    
+
     fstream file;
     ostringstream str1;
     str1<<dataset_id;

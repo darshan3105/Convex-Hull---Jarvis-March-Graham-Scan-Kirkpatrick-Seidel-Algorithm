@@ -10,15 +10,15 @@ using namespace std;
 
 int main(){
 
-    List<Point> points;
-    points.add(*(new Point(0,3)));
-    points.add(*(new Point(1,1)));
-    points.add(*(new Point(2,2)));
-    points.add(*(new Point(4,4)));
-    points.add(*(new Point(0,0)));
-    points.add(*(new Point(1,2)));
-    points.add(*(new Point(3,1)));
-    points.add(*(new Point(3,3)));
+    List<Point> points = make_list("datasets/1.csv");
+    // points.add(*(new Point(0,3)));
+    // points.add(*(new Point(1,1)));
+    // points.add(*(new Point(2,2)));
+    // points.add(*(new Point(4,4)));
+    // points.add(*(new Point(0,0)));
+    // points.add(*(new Point(1,2)));
+    // points.add(*(new Point(3,1)));
+    // points.add(*(new Point(3,3)));
 
 
     int pt_index = get_min_Y(points);
@@ -30,35 +30,37 @@ int main(){
       return 0;
     }
 
-    Stack<Integer> s;
+    Stack<int> s;
     s.push(0);
     s.push(1);
     s.push(2);
 
     for(int i=3;i<points.size();i++){
 
-      int temp = s.pop().get();
-      int first = s.peek().get();
+      int temp = s.pop();
+      int first = s.peek();
       s.push(temp);
-      int second = s.peek().get();
+      int second = s.peek();
       int third = i;
       while(points.get(first).orientation(points.get(second),points.get(third)) != 2){
         s.pop();
-        temp = s.pop().get();
-        first = s.peek().get();
+        temp = s.pop();
+        first = s.peek();
         s.push(temp);
-        second = s.peek().get();
+        second = s.peek();
         third = i;
       }
 
       s.push(i);
     }
 
+    List<Point> hull(s.size());
     while(!s.empty()){
-
-      int index = s.pop().get();
-      points.get(index).print();
-      cout<<endl;
+        int index = s.pop();
+        hull.add(points.get(index));
     }
+    hull.reverse();
+    hull.print();
 
+    make_result(hull,1);
 }

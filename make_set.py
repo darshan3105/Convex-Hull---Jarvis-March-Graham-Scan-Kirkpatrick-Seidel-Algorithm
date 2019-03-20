@@ -1,7 +1,7 @@
 import csv
 import random
 
-with open('datasets/1.csv','a') as csvfile:
+with open('datasets/1.csv','w') as csvfile:
     writer = csv.writer(csvfile);
     for i in range(0,100):
         f = random.randrange(-100,101,2)
