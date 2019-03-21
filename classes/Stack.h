@@ -28,7 +28,7 @@ class Stack{
         top = -1;
         sz = 0;
       }
-      void push(T p_index){
+      void push(T p){
 
           try{
             if(sz == capacity){
@@ -37,7 +37,7 @@ class Stack{
 
             top++;
             sz++;
-            arr[top] = p_index;
+            arr[top] = p;
           }
           catch(const char *msg){
 
@@ -67,7 +67,7 @@ class Stack{
       T peek(){
         try{
           if(sz == 0){
-            throw "Stack top exception";
+            throw "Stack peek exception";
           }
 
           return arr[top];
@@ -86,10 +86,24 @@ class Stack{
         if(sz == 0) return true;
         else return false;
       }
-      void print_stack(){
+      T next_to_top(){
+        try{
+          if(sz == 1){
+            throw "Stack  funderflow exception";
+          }
+
+          return arr[top-1];
+        }
+        catch(const char *msg){
+          cout<<msg<<endl;
+          exit(0);
+        }
+
+      }
+      void print(){
 
         for(int i=0;i<sz;i++){
-          cout<<arr[i].print()<<" ";
+          cout<<arr[i]<<" ";
         }
         cout<<endl;
       }

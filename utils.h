@@ -5,6 +5,7 @@
 #include<string>
 #include<fstream>
 #include<sstream>
+#include<map>
 #include "classes/List.h"
 #include "classes/Point.h"
 
@@ -42,6 +43,7 @@ List<Point> make_list(string addr){
       }
       Point p(a[0],a[1]);
       list.add(p);
+
     }
     file.close();
     return list;
