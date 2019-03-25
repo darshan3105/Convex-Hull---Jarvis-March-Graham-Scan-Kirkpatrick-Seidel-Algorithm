@@ -8,11 +8,11 @@ using namespace std;
 
 int main(){
 
-    JarvisMarch jm;
+    GrahamScan jm;
     List<Point> points = make_list("datasets/1.csv");
     jm.fit_set(points);
     List<Point> hull = jm.compute_hull();
     hull.print();
     cout<<endl;
-    make_result(hull,1);
+    make_result(hull,"results/results_1.csv");
 }

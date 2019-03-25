@@ -11,13 +11,11 @@
 
 using namespace std;
 
-void make_result(List<Point> list,int dataset_id){
+void make_result(List<Point> list,string addr){
 
     fstream file;
     ostringstream str1;
-    str1<<dataset_id;
-    string id = str1.str();
-    file.open("results/results_" + id + ".csv",ios::out);
+    file.open(addr,ios::out);
     for(int i=0;i<list.size();i++){
       Point p = list.get(i);
       file <<p.get_X()<<","<<p.get_Y()<<"\n";

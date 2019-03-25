@@ -89,7 +89,7 @@ class Stack{
       T next_to_top(){
         try{
           if(sz == 1){
-            throw "Stack  funderflow exception";
+            throw "Stack underflow exception";
           }
 
           return arr[top-1];

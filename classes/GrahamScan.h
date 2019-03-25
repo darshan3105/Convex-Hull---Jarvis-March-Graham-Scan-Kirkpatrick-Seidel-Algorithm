@@ -49,7 +49,7 @@ class GrahamScan{
           hull.add(points.get(index));
       }
       hull.reverse();
-
+      make_result(points,"datasets/1.csv");
       return hull;
     }
 };
