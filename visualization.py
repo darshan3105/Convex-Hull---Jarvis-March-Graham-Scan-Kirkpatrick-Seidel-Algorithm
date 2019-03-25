@@ -94,9 +94,14 @@ elif type == 'g':
 
     points = []
     lines = []
+    counter = 0
     lines.append(plt.plot(x_scatter[0:2],y_scatter[0:2],linewidth = 2,color = 'green',alpha = 0.4))
+    # plt.savefig('fig/foo'+str(counter)+'.png')
+    # counter+=1
     plt.pause(0.05)
     lines.append(plt.plot(x_scatter[1:3],y_scatter[1:3],linewidth = 2,color = 'green',alpha = 0.4))
+    # plt.savefig('fig/foo'+str(counter)+'.png')
+    # counter+=1
     plt.pause(0.05)
     points.append((x_scatter[0],y_scatter[0]))
     points.append((x_scatter[1],y_scatter[1]))
@@ -113,10 +118,14 @@ elif type == 'g':
             y_temp.append(y_scatter[i])
             y_temp.append(top[1])
             lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.4))
+            # plt.savefig('fig/foo'+str(counter)+'.png')
+            # counter+=1
             plt.pause(0.05)
 
             line = lines.pop()
             line[0].remove()
+            plt.savefig('fig/foo'+str(counter)+'.png')
+            counter+=1
             plt.pause(0.05)
 
             points.pop()
@@ -124,6 +133,8 @@ elif type == 'g':
             line = lines.pop()
             line[0].remove()
             plt.pause(0.05)
+            # plt.savefig('fig/foo'+str(counter)+'.png')
+            # counter+=1
 
             top = points[len(points)-1]
             next_to_top = points[len(points)-2]
@@ -136,6 +147,8 @@ elif type == 'g':
         y_temp.append(points[len(points)-1][1])
         y_temp.append(points[len(points)-2][1])
         lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.4))
+        plt.savefig('fig/foo'+str(counter)+'.png')
+        counter+=1
         plt.pause(0.05)
 
     l = len(x_hull) - 2;
@@ -146,5 +159,7 @@ elif type == 'g':
     y_temp.append(y_hull[l])
     y_temp.append(y_hull[l+1])
     lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.4))
+    # plt.savefig('fig/foo'+str(counter)+'.png')
+    # counter+=1
 
     plt.show()
