@@ -17,37 +17,36 @@ def orientation(p1,p2,p3):
 
 x_scatter = []
 y_scatter = []
-
-with open("datasets/1.csv") as csvfile:
-    readcsv = csv.reader(csvfile,delimiter = ',')
-    for row in readcsv:
-        x_scatter.append(int(row[0]))
-        y_scatter.append(int(row[1]))
-
 x_hull = []
 y_hull = []
-
-with open("results/results_1.csv") as csvfile:
-    readcsv = csv.reader(csvfile,delimiter = ',')
-    for row in readcsv:
-        x_hull.append(int(row[0]))
-        y_hull.append(int(row[1]))
-
-
-x_hull.append(x_hull[0])
-y_hull.append(y_hull[0])
-x_scatter = np.asarray(x_scatter)
-y_scatter = np.asarray(y_scatter)
-x_hull = np.asarray(x_hull)
-y_hull = np.asarray(y_hull)
-
-plt.close('all')
-plt.scatter(x_scatter,y_scatter,s = 20)
 
 print("Enter hull type:")
 type = input()
 
 if type == 'j':
+
+    with open("datasets/points.csv") as csvfile:
+        readcsv = csv.reader(csvfile,delimiter = ',')
+        for row in readcsv:
+            x_scatter.append(int(row[0]))
+            y_scatter.append(int(row[1]))
+
+    with open("results/results_1.csv") as csvfile:
+        readcsv = csv.reader(csvfile,delimiter = ',')
+        for row in readcsv:
+            x_hull.append(int(row[0]))
+            y_hull.append(int(row[1]))
+
+    x_hull.append(x_hull[0])
+    y_hull.append(y_hull[0])
+    x_scatter = np.asarray(x_scatter)
+    y_scatter = np.asarray(y_scatter)
+    x_hull = np.asarray(x_hull)
+    y_hull = np.asarray(y_hull)
+
+    plt.close('all')
+    plt.scatter(x_scatter,y_scatter,s = 20)
+
     for i in range(0,len(x_hull) -1):
         for j in range(0,len(x_scatter)):
 
@@ -70,6 +69,29 @@ if type == 'j':
     #plt.savefig('fig/z.png')
     plt.show()
 elif type == 'g':
+
+    with open("datasets/points_sorted.csv") as csvfile:
+        readcsv = csv.reader(csvfile,delimiter = ',')
+        for row in readcsv:
+            x_scatter.append(int(row[0]))
+            y_scatter.append(int(row[1]))
+
+    with open("results/results_1.csv") as csvfile:
+        readcsv = csv.reader(csvfile,delimiter = ',')
+        for row in readcsv:
+            x_hull.append(int(row[0]))
+            y_hull.append(int(row[1]))
+
+    x_hull.append(x_hull[0])
+    y_hull.append(y_hull[0])
+    x_scatter = np.asarray(x_scatter)
+    y_scatter = np.asarray(y_scatter)
+    x_hull = np.asarray(x_hull)
+    y_hull = np.asarray(y_hull)
+
+    plt.close('all')
+    plt.scatter(x_scatter,y_scatter,s = 20)
+
     points = []
     lines = []
     lines.append(plt.plot(x_scatter[0:2],y_scatter[0:2],linewidth = 2,color = 'green',alpha = 0.4))

@@ -9,7 +9,7 @@ using namespace std;
 int main(){
 
     GrahamScan jm;
-    List<Point> points = make_list("datasets/1.csv");
+    List<Point> points = make_list("datasets/points.csv");
     jm.fit_set(points);
     List<Point> hull = jm.compute_hull();
     hull.print();
