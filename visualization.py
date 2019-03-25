@@ -5,6 +5,16 @@ import matplotlib.animation as animation
 import csv
 import time
 
+def orientation(p1,p2,p3):
+
+    val = (p2[1] - p1[1])*(p3[0] - p2[0]) - (p2[0] - p1[0])*(p3[1] - p2[1])
+    if val == 0:
+        return 0
+    elif val > 0:
+        return 1
+    else:
+        return 2
+
 x_scatter = []
 y_scatter = []
 
@@ -51,7 +61,7 @@ if type == 'j':
 
             line = plt.plot(x_temp,y_temp,linewidth = 2,color = 'red',alpha = 0.4)
             #plt.savefig('fig/foo'+str(i)+'_'+str(j)+'.png')
-            plt.pause(0.1)
+            plt.pause(0.05)
             line.pop(0).remove()
 
 
@@ -60,39 +70,59 @@ if type == 'j':
     #plt.savefig('fig/z.png')
     plt.show()
 elif type == 'g':
+    points = []
     lines = []
-    i=2
-    j=2
-    lines.append(plt.plot(x_hull[0:2],y_hull[0:2],linewidth = 2,color = 'green',alpha = 0.4))
-    plt.pause(0.1)
-    while i < len(x_hull) -1:
-        if x_hull[i] == x_scatter[j] and y_hull[i] == y_scatter[j]:
-            lines.append(plt.plot(x_scatter[j-1:j+1],y_scatter[j-1:j+1],linewidth = 2,color = 'green',alpha = 0.4))
-            # plt.pause(1)
-            # k = j - 1
-            # while x_scatter[k] != x_hull[i-1] or y_scatter[k] != y_hull[i-1]:
-            #     line = lines.pop()
-            #     line[0].remove()
-            #     plt.pause(0.1)
-            #     k-=1
-            #
-            # line = lines.pop()
-            # line[0].remove()
-            # lines.append(plt.plot(x_hull[i-1:i+1],y_hull[i-1:i+1],linewidth = 2,color = 'green',alpha = 0.4))
-            # plt.pause(0.1)
-            i+=1
-            j+=1
+    lines.append(plt.plot(x_scatter[0:2],y_scatter[0:2],linewidth = 2,color = 'green',alpha = 0.4))
+    plt.pause(0.05)
+    lines.append(plt.plot(x_scatter[1:3],y_scatter[1:3],linewidth = 2,color = 'green',alpha = 0.4))
+    plt.pause(0.05)
+    points.append((x_scatter[0],y_scatter[0]))
+    points.append((x_scatter[1],y_scatter[1]))
+    points.append((x_scatter[2],y_scatter[2]))
 
-        else:
-            lines.append(plt.plot(x_scatter[j-1:j+1],y_scatter[j-1:j+1],linewidth = 2,color = 'green',alpha = 0.4))
-            plt.pause(0.1)
+    for i in range(3,len(x_scatter)):
+        top = points[len(points)-1]
+        next_to_top = points[len(points)-2]
+        while orientation(next_to_top,top,(x_scatter[i],y_scatter[i])) != 2:
+            x_temp = []
+            y_temp = []
+            x_temp.append(x_scatter[i])
+            x_temp.append(top[0])
+            y_temp.append(y_scatter[i])
+            y_temp.append(top[1])
+            lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.4))
+            plt.pause(0.05)
+
             line = lines.pop()
             line[0].remove()
-            plt.pause(0.1)
-            while x_hull[i]!=x_scatter[j] or y_hull[i]!=y_scatter[j]:
-                j+=1
-            j+=1
+            plt.pause(0.05)
 
-    l = len(x_hull) - 2
-    plt.plot(x_hull[l:l+2],y_hull[l:l+2],linewidth = 2,color = 'green',alpha = 0.4)
+            points.pop()
+
+            line = lines.pop()
+            line[0].remove()
+            plt.pause(0.05)
+
+            top = points[len(points)-1]
+            next_to_top = points[len(points)-2]
+
+        points.append((x_scatter[i],y_scatter[i]))
+        x_temp = []
+        y_temp = []
+        x_temp.append(points[len(points)-1][0])
+        x_temp.append(points[len(points)-2][0])
+        y_temp.append(points[len(points)-1][1])
+        y_temp.append(points[len(points)-2][1])
+        lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.4))
+        plt.pause(0.05)
+
+    l = len(x_hull) - 2;
+    x_temp = []
+    y_temp = []
+    x_temp.append(x_hull[l])
+    x_temp.append(x_hull[l+1])
+    y_temp.append(y_hull[l])
+    y_temp.append(y_hull[l+1])
+    lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.4))
+
     plt.show()
