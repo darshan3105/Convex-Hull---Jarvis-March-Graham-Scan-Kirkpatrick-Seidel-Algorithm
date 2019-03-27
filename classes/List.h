@@ -40,6 +40,9 @@ class List{
       void remove(){
         sz--;
       }
+      void clear(){
+        sz = 0;
+      }
       void swap(int i1,int i2){
 
         T temp;
@@ -56,6 +59,12 @@ class List{
           arr[i] = arr[sz-i-1];
           arr[sz-i-1] = temp;
         }
+      }
+      T* begin(){
+        return &arr[0];
+      }
+      T* end(){
+        return &arr[sz-1];
       }
       void print(){
 

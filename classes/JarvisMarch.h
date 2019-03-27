@@ -12,7 +12,30 @@ class JarvisMarch{
 
     List<Point> points;
 
+    int get_min_Y(List<Point> points){
+
+      int i,curr_y,curr_x,index = 0;
+      float min_y = points.get(0).get_Y();
+
+
+      for (i=1;i<points.size();i++){
+
+        curr_y = points.get(i).get_Y();
+        curr_x = points.get(i).get_X();
+        if((curr_y < min_y) || (curr_y == min_y && curr_x < points.get(index).get_X())){
+
+          min_y = curr_y;
+          index = i;
+        }
+      }
+
+      return index;
+    }
+
   public:
+    JarvisMarch(){
+      points = List<Point>();
+    }
     void fit_set(List<Point> list){
       points = list;
     }

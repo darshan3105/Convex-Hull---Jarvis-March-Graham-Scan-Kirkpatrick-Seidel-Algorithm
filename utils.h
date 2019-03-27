@@ -2,6 +2,8 @@
 #define UTILS_H
 
 #include<iostream>
+#include<climits>
+#include<algorithm>
 #include<string>
 #include<fstream>
 #include<sstream>
@@ -10,6 +12,85 @@
 #include "classes/Point.h"
 
 using namespace std;
+
+float findMedian(float arr[], int n)
+{
+	sort(arr, arr+n); // Sort the array
+	return arr[n/2]; // Return middle element
+}
+
+void swap(float *a, float *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+int partition(float arr[], int l, int r, float x)
+{
+	// Search for x in arr[l..r] and move it to end
+	int i;
+	for (i=l; i<r; i++)
+		if (arr[i] == x)
+		break;
+	swap(&arr[i], &arr[r]);
+
+	// Standard partition algorithm
+	i = l;
+	for (int j = l; j <= r - 1; j++)
+	{
+		if (arr[j] <= x)
+		{
+			swap(&arr[i], &arr[j]);
+			i++;
+		}
+	}
+	swap(&arr[i], &arr[r]);
+	return i;
+}
+
+float kthSmallest(float arr[], int l, int r, int k)
+{
+	// If k is smaller than number of elements in array
+	if (k > 0 && k <= r - l + 1)
+	{
+		int n = r-l+1; // Number of elements in arr[l..r]
+
+		// Divide arr[] in groups of size 5, calculate median
+		// of every group and store it in median[] array.
+		int i;
+    float median[(n+4)/5]; // There will be floor((n+4)/5) groups;
+		for (i=0; i<n/5; i++)
+			median[i] = findMedian(arr+l+i*5, 5);
+		if (i*5 < n) //For last group with less than 5 elements
+		{
+			median[i] = findMedian(arr+l+i*5, n%5);
+			i++;
+		}
+
+		// Find median of all medians using recursive call.
+		// If median[] has only one element, then no need
+		// of recursive call
+		float medOfMed = (i == 1)? median[i-1]:
+								kthSmallest(median, 0, i-1, i/2);
+
+		// Partition the array around a random element and
+		// get position of pivot element in sorted array
+		int pos = partition(arr, l, r, medOfMed);
+
+		// If position is same as k
+		if (pos-l == k-1)
+			return arr[pos];
+		if (pos-l > k-1) // If position is more, recur for left
+			return kthSmallest(arr, l, pos-1, k);
+
+		// Else recur for right subarray
+		return kthSmallest(arr, pos+1, r, k-pos+l-1);
+	}
+
+	// If k is more than number of elements in array
+	return INT_MAX;
+}
 
 void make_result(List<Point> list,string addr){
 
@@ -45,110 +126,6 @@ List<Point> make_list(string addr){
     }
     file.close();
     return list;
-}
-
-int get_min_Y(List<Point> points){
-
-  int i,curr_y,curr_x,index = 0;
-  float min_y = points.get(0).get_Y();
-
-
-  for (i=1;i<points.size();i++){
-
-    curr_y = points.get(i).get_Y();
-    curr_x = points.get(i).get_X();
-    if((curr_y < min_y) || (curr_y == min_y && curr_x < points.get(index).get_X())){
-
-      min_y = curr_y;
-      index = i;
-    }
-  }
-
-  return index;
-}
-
-void merge(List<Point> points,int l,int m,int r,Point ref){
-
-  int i,j,k;
-  int n1 = m-l+1;
-  int n2 = r-m;
-
-  List<Point> L(n1);
-  List<Point> R(n2);
-
-  for(i=0;i<n1;i++){
-
-    L.add(points.get(l+i));
-  }
-  for(i=0;i<n2;i++){
-
-    R.add(points.get(m+1+i));
-  }
-
-  i=0;
-  j=0;
-  k=l;
-
-  while(i<n1 && j<n2){
-
-    Point p1;
-    Point p2;
-
-    //p1.set_point(L.get(i));
-    //p2.set_point(R.get(j));
-
-    p1 = L.get(i);
-    p2 = R.get(j);
-
-    int o = ref.orientation(p1,p2);
-    if(o==0){
-      if(ref.sq_dist(p2) >= ref.sq_dist(p1)){
-
-        points.edit(k,p2);
-        j++;
-      }
-      else{
-
-        points.edit(k,p1);
-        i++;
-      }
-    }
-    else if(o == 2){
-      points.edit(k,p1);
-      i++;
-    }
-    else{
-      points.edit(k,p2);
-      j++;
-    }
-    k++;
-  }
-  while(i<n1){
-
-    points.edit(k,L.get(i));
-    i++;
-    k++;
-  }
-  while(j<n2){
-    points.edit(k,R.get(j));
-    j++;
-    k++;
-  }
-}
-void mergesort(List<Point> points,int l,int r,Point ref){
-
-  if(l < r){
-
-    int m = (l+r)/2;
-    mergesort(points,l,m,ref);
-    mergesort(points,m+1,r,ref);
-    merge(points,l,m,r,ref);
-  }
-}
-void sort_by_angle(List<Point> points,int index){
-
-    points.swap(0,index);
-    mergesort(points,1,points.size()-1,points.get(0));
 }
 
 #endif
