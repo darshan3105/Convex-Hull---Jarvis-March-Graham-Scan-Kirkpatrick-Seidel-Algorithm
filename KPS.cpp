@@ -1,4 +1,5 @@
 #include<iostream>
+#include<algorithm>
 #include<climits>
 #include "classes/List.h"
 #include "classes/Pair.h"
@@ -13,9 +14,39 @@ bool sort_by_x(Point a,Point b){
   return a.get_X() < b.get_X();
 }
 
+List<Point> get_upperT(Point p1,Point p2,List<Point> points){
+
+  int x1 = p1.get_X();
+  int x2 = p2.get_X();
+  int y1 = p1.get_Y();
+  int y2 = p2.get_Y();
+  float slope = (float)(y2-y1)/(x2-x1);
+
+  List<Point> upper_T;
+
+  for(int i=0;i<points.size();i++){
+    Point curr_point = points.get(i);
+    int x = curr_point.get_X();
+    int y = curr_point.get_Y();
+    if(x1 == x)
+      continue;
+    float curr_slope = (float)(y1-y)/(x1-x);
+    if(curr_slope > slope){
+      upper_T.add(curr_point);
+    }
+  }
+  upper_T.add(p1);
+  upper_T.add(p2);
+
+  return upper_T;
+
+}
+
 Pair<Point,Point> get_upper_bridge(List<Point> points,float median){
 
-    if(points.size() == 2){
+    points.print();
+    cout<<endl;
+    if(points.size() <= 2){
       Point first = points.get(0);
       Point second = points.get(1);
       Pair<Point,Point> upper_bridge(first,second);
@@ -24,6 +55,8 @@ Pair<Point,Point> get_upper_bridge(List<Point> points,float median){
     }
     else{
       sort(points.begin(),points.end(),sort_by_x);
+      cout<<"sorted: ";
+      points.print();
 
       List<Point> candidates;
       List<Pair<Point,Point> > pairs;
@@ -109,6 +142,7 @@ Pair<Point,Point> get_upper_bridge(List<Point> points,float median){
         }
       }
 
+
       float max_c = INT_MIN;
       for(int i=0;i<points.size();i++){
 
@@ -141,7 +175,13 @@ Pair<Point,Point> get_upper_bridge(List<Point> points,float median){
         }
       }
 
-      if(pmin.get_X() <= median && pmax.get_X() < median){
+      cout<<"pmin :";
+      pmin.print();
+      cout<<" pmax :";
+      pmax.print();
+      cout<<"\n"<<"***************"<<endl;
+
+      if(pmin.get_X() <= median && pmax.get_X() > median){
         Pair<Point,Point> upper_bridge(pmin,pmax);
         return upper_bridge;
       }
@@ -163,7 +203,7 @@ Pair<Point,Point> get_upper_bridge(List<Point> points,float median){
         return get_upper_bridge(candidates,median);
 
       }
-      else if(pmin.get_X() > median_slope){
+      else if(pmin.get_X() > median){
         for(int i=0;i<EQUAL.size();i++){
           Point pt = EQUAL.get(i).get_first();
           candidates.add(pt);
@@ -188,48 +228,33 @@ void get_upper_hull(Point pmin,Point pmax,List<Point> points){
 
     int n = points.size();
     float arr[n];
-
     for(int i=0;i<n;i++){
       arr[i] = points.get(i).get_X();
     }
     float median = kthSmallest(arr,0,n-1,(n+1)/2);
     Pair<Point,Point> upper_bridge = get_upper_bridge(points,median);
-    if(!upper_bridge.get_first().equals(upper_bridge.get_second())){
-      upper_bridge.get_first().print();
-      upper_bridge.get_second().print();
-    }
-    else{
-      upper_bridge.get_first().print();
-    }
+    // if(!upper_bridge.get_first().equals(upper_bridge.get_second())){
+    //   upper_bridge.get_first().print();
+    //   upper_bridge.get_second().print();
+    //   cout<<endl;
+    // }
+    // else{
+    //   upper_bridge.get_first().print();
+    //   cout<<endl;
+    // }
 
     Point pl = upper_bridge.get_first();
     Point pr = upper_bridge.get_second();
 
-    List<Point> upper_T;
-    for(int i=0;i<points.size();i++){
-      Point curr_point = points.get(i);
-      if(curr_point.get_X() > pmin.get_X() && curr_point.get_X() < pl.get_X()){
-        upper_T.add(curr_point);
-      }
+    if(!pmin.equals(pl)){
+      List<Point> upper_T_left = get_upperT(pmin,pl,points);
+      get_upper_hull(pmin,pl,upper_T_left);
     }
-    upper_T.add(pmin);
-    upper_T.add(pl);
 
-    get_upper_hull(pmin,pl,upper_T);
-
-    upper_T.clear();
-
-    for(int i=0;i<points.size();i++){
-      Point curr_point = points.get(i);
-      if(curr_point.get_X() > pr.get_X() && curr_point.get_X() < pmax.get_X()){
-        upper_T.add(curr_point);
-      }
+    if(!pmax.equals(pr)){
+      List<Point> upper_T_right = get_upperT(pmax,pr,points);
+      get_upper_hull(pr,pmax,upper_T_right);
     }
-    upper_T.add(pr);
-    upper_T.add(pmax);
-
-    get_upper_hull(pr,pmax,upper_T);
-
 
 }
 
@@ -238,6 +263,8 @@ int main(){
     List<Point> points;
     points.add(*(new Point(0,3)));
     points.add(*(new Point(1,1)));
+    points.add(*(new Point(3,5)));
+    points.add(*(new Point(2,4)));
     points.add(*(new Point(2,2)));
     points.add(*(new Point(4,4)));
     points.add(*(new Point(0,0)));
@@ -277,15 +304,7 @@ int main(){
 
     }
 
-    List<Point> upper_T;
-    for(int i=0;i<points.size();i++){
-      Point curr_point = points.get(i);
-      if(curr_point.get_X() > pmin_u.get_X() && curr_point.get_X() < pmax_u.get_X()){
-        upper_T.add(curr_point);
-      }
-    }
-    upper_T.add(pmin_u);
-    upper_T.add(pmax_u);
+    List<Point> upper_T = get_upperT(pmin_u,pmax_u,points);
 
     get_upper_hull(pmin_u,pmax_u,upper_T);
 
