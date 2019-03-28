@@ -8,7 +8,7 @@ using namespace std;
 
 int main(){
 
-    JarvisMarch jm;
+    GrahamScan jm;
     List<Point> points = make_list("datasets/points.csv");
     jm.fit_set(points);
     List<Point> hull = jm.compute_hull();

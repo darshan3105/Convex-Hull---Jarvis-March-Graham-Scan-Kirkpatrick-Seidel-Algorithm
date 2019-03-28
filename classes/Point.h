@@ -7,8 +7,8 @@ using namespace std;
 
 class Point{
 
-  int x;
-  int y;
+  double x;
+  double y;
 
   public:
 
@@ -17,20 +17,20 @@ class Point{
       this->x = -1;
       this->y = -1;
     }
-    Point(int x,int y){
+    Point(double x,double y){
 
       this->x = x;
       this->y = y;
     }
-    int get_X(){
+    double get_X(){
 
       return this->x;
     }
-    int get_Y(){
+    double get_Y(){
 
       return this->y;
     }
-    void set_point(int x,int y){
+    void set_point(double x,double y){
 
       this->x = x;
       this->y = y;
@@ -40,10 +40,10 @@ class Point{
       this->x = pt.get_X();
       this->y = pt.get_Y();
     }
-    void set_X(int x){
+    void set_X(double x){
       this->x = x;
     }
-    void set_Y(int y){
+    void set_Y(double y){
 
       this->y = y;
     }

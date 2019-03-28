@@ -13,20 +13,20 @@
 
 using namespace std;
 
-float findMedian(float arr[], int n)
+float findMedian(double arr[], int n)
 {
 	sort(arr, arr+n); // Sort the array
 	return arr[n/2]; // Return middle element
 }
 
-void swap(float *a, float *b)
+void swap(double *a, double *b)
 {
-	int temp = *a;
+	double temp = *a;
 	*a = *b;
 	*b = temp;
 }
 
-int partition(float arr[], int l, int r, float x)
+int partition(double arr[], int l, int r, double x)
 {
 	// Search for x in arr[l..r] and move it to end
 	int i;
@@ -49,7 +49,7 @@ int partition(float arr[], int l, int r, float x)
 	return i;
 }
 
-float kthSmallest(float arr[], int l, int r, int k)
+float kthSmallest(double arr[], int l, int r, int k)
 {
 	// If k is smaller than number of elements in array
 	if (k > 0 && k <= r - l + 1)
@@ -59,7 +59,7 @@ float kthSmallest(float arr[], int l, int r, int k)
 		// Divide arr[] in groups of size 5, calculate median
 		// of every group and store it in median[] array.
 		int i;
-    float median[(n+4)/5]; // There will be floor((n+4)/5) groups;
+    double median[(n+4)/5]; // There will be floor((n+4)/5) groups;
 		for (i=0; i<n/5; i++)
 			median[i] = findMedian(arr+l+i*5, 5);
 		if (i*5 < n) //For last group with less than 5 elements
@@ -71,7 +71,7 @@ float kthSmallest(float arr[], int l, int r, int k)
 		// Find median of all medians using recursive call.
 		// If median[] has only one element, then no need
 		// of recursive call
-		float medOfMed = (i == 1)? median[i-1]:
+		double medOfMed = (i == 1)? median[i-1]:
 								kthSmallest(median, 0, i-1, i/2);
 
 		// Partition the array around a random element and
@@ -115,9 +115,9 @@ List<Point> make_list(string addr){
       istringstream templine(line);
       string data;
       int i=0;
-      int a[2];
+      double a[2];
       while(getline(templine,data,',')){
-          a[i] = stoi(data);
+          a[i] = stof(data);
           i++;
       }
       Point p(a[0],a[1]);

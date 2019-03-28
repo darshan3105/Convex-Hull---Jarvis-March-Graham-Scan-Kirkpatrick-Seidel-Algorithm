@@ -64,7 +64,7 @@ class List{
         return &arr[0];
       }
       T* end(){
-        return &arr[sz-1];
+        return &arr[sz];
       }
       void print(){
 
