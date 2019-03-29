@@ -1,3 +1,7 @@
+#ifndef GRAHAM_SCAN_H
+#define GRAHAM_SCAN_H
+
+
 #include<iostream>
 #include<string>
 #include "data_types.h"
@@ -69,13 +73,13 @@ class GrahamScan{
         if(o==0){
           if(ref.sq_dist(p2) >= ref.sq_dist(p1)){
 
-            points.edit(k,p2);
-            j++;
+            points.edit(k,p1);
+            i++;
           }
           else{
 
-            points.edit(k,p1);
-            i++;
+            points.edit(k,p2);
+            j++;
           }
         }
         else if(o == 2){
@@ -131,6 +135,17 @@ class GrahamScan{
       int pt_index = get_min_Y(points);
       sort_by_angle(points,pt_index);
 
+
+      List<Point> temp;
+      temp.add(points.get(0));
+      for(int i=1;i<points.size();i++){
+        while (i < points.size()-1 && points.get(0).orientation(points.get(i),points.get(i+1))==0)
+		        i++;
+
+        temp.add(points.get(i));
+      }
+
+      points = temp;
       if(points.size() < 3){
 
         cout<<"Convex hull doesn't exist!!"<<endl;
@@ -158,6 +173,8 @@ class GrahamScan{
       }
       hull.reverse();
       make_result(points,"datasets/points_sorted.csv");
+      make_result(hull,"results/results_1.csv");
       return hull;
     }
 };
+#endif

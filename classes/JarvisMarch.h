@@ -1,3 +1,7 @@
+#ifndef JARVIS_MARCH_H
+#define JARVIS_MARCH_H
+
+
 #include<iostream>
 #include<string>
 #include "data_types.h"
@@ -68,6 +72,8 @@ class JarvisMarch{
 
       }while(p != l);
 
+      make_result(hull,"results/results_1.csv");
       return hull;
     }
 };
+#endif

@@ -21,11 +21,15 @@ print("*****************************")
 print("\n")
 print("Press 'j' for JarvisMarch")
 print("Press 'g' for GrahamScan")
+print("Press 'k' for KPS")
+
 print("\n")
 
 print("Enter hull type:")
 type = input()
 
+x_scatter_temp = []
+y_scatter_temp = []
 x_scatter = []
 y_scatter = []
 x_hull = []
@@ -36,60 +40,14 @@ if type == 'j':
     with open("datasets/points.csv") as csvfile:
         readcsv = csv.reader(csvfile,delimiter = ',')
         for row in readcsv:
-            x_scatter.append(int(row[0]))
-            y_scatter.append(int(row[1]))
-
-    # with open("results/results_1.csv") as csvfile:
-    #     readcsv = csv.reader(csvfile,delimiter = ',')
-    #     for row in readcsv:
-    #         x_hull.append(int(row[0]))
-    #         y_hull.append(int(row[1]))
-    #
-    # x_hull.append(x_hull[0])
-    # y_hull.append(y_hull[0])
-    # x_scatter = np.asarray(x_scatter)
-    # y_scatter = np.asarray(y_scatter)
-    # x_hull = np.asarray(x_hull)
-    # y_hull = np.asarray(y_hull)
-
-    plt.close('all')
-    plt.scatter(x_scatter,y_scatter,s = 20)
-    plt.show()
-
-    # for i in range(0,len(x_hull) -1):
-    #     for j in range(0,len(x_scatter)):
-    #
-    #         x_temp = []
-    #         y_temp = []
-    #         x_temp.append(x_hull[i])
-    #         y_temp.append(y_hull[i])
-    #         x_temp.append(x_scatter[j])
-    #         y_temp.append(y_scatter[j])
-    #
-    #
-    #         line = plt.plot(x_temp,y_temp,linewidth = 2,color = 'red',alpha = 0.4)
-    #         #plt.savefig('fig/foo'+str(i)+'_'+str(j)+'.png')
-    #         plt.pause(0.05)
-    #         line.pop(0).remove()
-    #
-    #
-    #     plt.plot(x_hull[i:i+2],y_hull[i:i+2],linewidth = 2,color = 'green',alpha = 0.4)
-    #
-    # #plt.savefig('fig/z.png')
-    # plt.show()
-elif type == 'g':
-
-    with open("datasets/points_sorted.csv") as csvfile:
-        readcsv = csv.reader(csvfile,delimiter = ',')
-        for row in readcsv:
-            x_scatter.append(int(row[0]))
-            y_scatter.append(int(row[1]))
+            x_scatter.append(float(row[0]))
+            y_scatter.append(float(row[1]))
 
     with open("results/results_1.csv") as csvfile:
         readcsv = csv.reader(csvfile,delimiter = ',')
         for row in readcsv:
-            x_hull.append(int(row[0]))
-            y_hull.append(int(row[1]))
+            x_hull.append(float(row[0]))
+            y_hull.append(float(row[1]))
 
     x_hull.append(x_hull[0])
     y_hull.append(y_hull[0])
@@ -101,14 +59,66 @@ elif type == 'g':
     plt.close('all')
     plt.scatter(x_scatter,y_scatter,s = 20)
 
+    for i in range(0,len(x_hull) -1):
+        for j in range(0,len(x_scatter)):
+
+            x_temp = []
+            y_temp = []
+            x_temp.append(x_hull[i])
+            y_temp.append(y_hull[i])
+            x_temp.append(x_scatter[j])
+            y_temp.append(y_scatter[j])
+
+
+            line = plt.plot(x_temp,y_temp,linewidth = 2,color = 'red',alpha = 0.6)
+            # plt.savefig('fig/foo'+str(i)+'_'+str(j)+'.png')
+            plt.pause(0.05)
+            line.pop(0).remove()
+
+
+        plt.plot(x_hull[i:i+2],y_hull[i:i+2],linewidth = 2,color = 'green',alpha = 0.6)
+
+    # plt.savefig('fig/z.png')
+    plt.show()
+
+elif type == 'g':
+
+    with open("datasets/points.csv") as csvfile:
+        readcsv = csv.reader(csvfile,delimiter = ',')
+        for row in readcsv:
+            x_scatter_temp.append(float(row[0]))
+            y_scatter_temp.append(float(row[1]))
+
+    with open("datasets/points_sorted.csv") as csvfile:
+        readcsv = csv.reader(csvfile,delimiter = ',')
+        for row in readcsv:
+            x_scatter.append(float(row[0]))
+            y_scatter.append(float(row[1]))
+
+    with open("results/results_1.csv") as csvfile:
+        readcsv = csv.reader(csvfile,delimiter = ',')
+        for row in readcsv:
+            x_hull.append(float(row[0]))
+            y_hull.append(float(row[1]))
+
+    x_hull.append(x_hull[0])
+    y_hull.append(y_hull[0])
+    x_scatter = np.asarray(x_scatter)
+    y_scatter = np.asarray(y_scatter)
+    x_hull = np.asarray(x_hull)
+    y_hull = np.asarray(y_hull)
+
+    plt.close('all')
+    plt.scatter(x_scatter_temp,y_scatter_temp,s = 20)
+
     points = []
     lines = []
     counter = 0
-    lines.append(plt.plot(x_scatter[0:2],y_scatter[0:2],linewidth = 2,color = 'green',alpha = 0.4))
+    lines.append(plt.plot(x_scatter[0:2],y_scatter[0:2],linewidth = 2,color = 'green',alpha = 0.6))
     # plt.savefig('fig/foo'+str(counter)+'.png')
     # counter+=1
     plt.pause(0.05)
-    lines.append(plt.plot(x_scatter[1:3],y_scatter[1:3],linewidth = 2,color = 'green',alpha = 0.4))
+    lines.append(plt.plot(x_scatter[1:3],y_scatter[1:3],linewidth = 2,color = 'green',alpha = 0.6))
     # plt.savefig('fig/foo'+str(counter)+'.png')
     # counter+=1
     plt.pause(0.05)
@@ -126,7 +136,7 @@ elif type == 'g':
             x_temp.append(top[0])
             y_temp.append(y_scatter[i])
             y_temp.append(top[1])
-            lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.4))
+            lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.6))
             # plt.savefig('fig/foo'+str(counter)+'.png')
             # counter+=1
             plt.pause(0.05)
@@ -142,8 +152,8 @@ elif type == 'g':
             line = lines.pop()
             line[0].remove()
             plt.pause(0.05)
-            # plt.savefig('fig/foo'+str(counter)+'.png')
-            # counter+=1
+            plt.savefig('fig/foo'+str(counter)+'.png')
+            counter+=1
 
             top = points[len(points)-1]
             next_to_top = points[len(points)-2]
@@ -155,7 +165,7 @@ elif type == 'g':
         x_temp.append(points[len(points)-2][0])
         y_temp.append(points[len(points)-1][1])
         y_temp.append(points[len(points)-2][1])
-        lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.4))
+        lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.6))
         # plt.savefig('fig/foo'+str(counter)+'.png')
         # counter+=1
         plt.pause(0.05)
@@ -167,8 +177,39 @@ elif type == 'g':
     x_temp.append(x_hull[l+1])
     y_temp.append(y_hull[l])
     y_temp.append(y_hull[l+1])
-    lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.4))
+    lines.append(plt.plot(x_temp,y_temp,linewidth = 2,color = 'green',alpha = 0.6))
     # plt.savefig('fig/foo'+str(counter)+'.png')
     # counter+=1
+
+    plt.show()
+
+elif type == 'k':
+
+    with open("datasets/points.csv") as csvfile:
+        readcsv = csv.reader(csvfile,delimiter = ',')
+        for row in readcsv:
+            x_scatter.append(float(row[0]))
+            y_scatter.append(float(row[1]))
+
+    with open("results/results_1.csv") as csvfile:
+        readcsv = csv.reader(csvfile,delimiter = ',')
+        for row in readcsv:
+            x_hull.append(float(row[0]))
+            y_hull.append(float(row[1]))
+
+    x_scatter = np.asarray(x_scatter)
+    y_scatter = np.asarray(y_scatter)
+    x_hull = np.asarray(x_hull)
+    y_hull = np.asarray(y_hull)
+
+    plt.close('all')
+    plt.scatter(x_scatter,y_scatter,s = 20)
+
+    i = 0;
+    while i < len(x_hull):
+        plt.plot(x_hull[i:i+2],y_hull[i:i+2],linewidth = 2,color = 'green',alpha = 0.6)
+        plt.savefig('fig/foo'+str(i)+'.png')
+        plt.pause(0.05)
+        i+=2
 
     plt.show()

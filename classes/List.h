@@ -27,6 +27,12 @@ class List{
           arr[sz] = t;
           sz++;
       }
+      void append_list(List<T> list){
+        for(int i=0;i<list.size();i++){
+          T temp = list.get(i);
+          add(temp);
+        }
+      }
       T get(int index){
           T t = arr[index];
           return t;
