@@ -12,6 +12,10 @@
 
 using namespace std;
 
+/** Graham scan is an algorithm used for getting the convex hull of a set of points.
+  * The object of this class uses GrahamScan algorithm to find the convex hull.
+ */
+
 class GrahamScan{
 
     List<Point> points;
@@ -121,16 +125,30 @@ class GrahamScan{
     }
 
   public:
+
+    /** Contructor.
+      * This is the default constructor for the class GrahamScan.It creates an empty list of type List<Point>.
+     */
     GrahamScan(){
       points = List<Point>();
     }
 
+    /** accepts a list of type List<Point> to make the dataset for finding the convex hull.
+      * @param a list of type List<Point>
+     */
     void fit_set(List<Point> list){
       points = list;
     }
+
+    /** accepts a point of type Point and adds it to the dataset.
+      * @param a point of type Point
+     */
     void add_point(Point pt){
       points.add(pt);
     }
+
+    /** returns a list of type List<Point> containing the points on the convex hull.
+     */
     List<Point> compute_hull(){
       int pt_index = get_min_Y(points);
       sort_by_angle(points,pt_index);

@@ -12,6 +12,11 @@
 
 using namespace std;
 
+/** Jarvis march is an algorithm used for getting the convex hull of a set of points.
+  * The object of this class uses JarvisMarch algorithm to find the convex hull.
+ */
+
+
 class JarvisMarch{
 
     List<Point> points;
@@ -37,15 +42,30 @@ class JarvisMarch{
     }
 
   public:
+
+    /** Contructor.
+      * This is the default constructor for the class JarvisMarch.It creates an empty list of type List<Point>.
+     */
     JarvisMarch(){
       points = List<Point>();
     }
+
+    /** accepts a list of type List<Point> to make the dataset for finding the convex hull.
+      * @param a list of type List<Point>
+     */
     void fit_set(List<Point> list){
       points = list;
     }
+
+    /** accepts a point of type Point and adds it to the dataset.
+      * @param a point of type Point
+     */
     void add_point(Point pt){
       points.add(pt);
     }
+
+    /** returns a list of type List<Point> containing the points on the convex hull.
+     */
     List<Point> compute_hull(){
       if(points.size() < 3){
 

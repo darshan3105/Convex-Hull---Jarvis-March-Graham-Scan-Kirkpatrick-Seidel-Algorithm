@@ -59,6 +59,7 @@ if type == 'j':
     plt.close('all')
     plt.scatter(x_scatter,y_scatter,s = 20)
 
+
     for i in range(0,len(x_hull) -1):
         for j in range(0,len(x_scatter)):
 
@@ -208,7 +209,7 @@ elif type == 'k':
     i = 0;
     while i < len(x_hull):
         plt.plot(x_hull[i:i+2],y_hull[i:i+2],linewidth = 2,color = 'green',alpha = 0.6)
-        plt.savefig('fig/foo'+str(i)+'.png')
+        # plt.savefig('fig/foo'+str(i)+'.png')
         plt.pause(0.05)
         i+=2
 
