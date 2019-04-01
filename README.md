@@ -8,8 +8,7 @@ Steps to get the results:
 1. input the points of the dataset into the file 'datasets/points.csv'
 2. in the file main.cpp instantiate the object of the class of algorithm(i.e JarvisMarch/GrahamScan/KPS)
 3. compile the main file: g++ main.cpp
-4. run the executable: ./a.out]
+4. run the executable: ./a.out
 
-For better understanding please refer to the documentation provided.
+To visualize the algorithm, run the visualization.py file using : python visualization.py
 
-To view the documentation open the file 'html/index.html' in a web browser.
