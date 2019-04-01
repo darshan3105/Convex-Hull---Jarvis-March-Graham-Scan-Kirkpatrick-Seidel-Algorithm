@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Bootstrap Theme Simply Me</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+  body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 {
+    background-color: #1abc9c; /* Green */
+    color: #ffffff;
+  }
+  .bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+  }
+  .bg-3 {
+    background-color: #FF9033; /* Dark Blue */
+    color: #ffffff;
+  }
+
+  .bg-4 {
+    background-color: #ff80aa; /* White */
+    color: #555555;
+  }
+  .bg-5 {
+    background-color:  #c653c6 ; /* Black Gray */
+    color: #fff;
+  }
+  .container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+  .navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+    color: #1abc9c !important;
+  }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">CONVEX HULL</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">GRAHAM'S</a></li>
+        <li><a href="#">JARVIS</a></li>
+        <li><a href="#">KIRK PATRIK SEIDEL</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+  <h3 class="margin">CONVEX HULL</h3>
+  <img src="cv.jpeg" lass="img-rounded" alt="Cinque Terre">
+  <h3>A convex hull is the smallest convex polygon containing all the given points.</h3>
+</div>
+
+<!-- Second Container -->
+<div class="container-fluid bg-2 text-center">
+  <h3 class="margin">GRAHAM'S</h3>
+  <img src="GrahamScan.gif"  style="display:inline" alt="Bird" width="350" height="350">
+  <p>Graham's scan is a method of finding the convex hull of a finite set of points in the plane with time complexity O(n log n). It is named after Ronald Graham, who published the original algorithm in 1972. The algorithm finds all vertices of the convex hull ordered along its boundary. </p>
+</div>
+
+<!-- Third Container -->
+<div class="container-fluid bg-3 text-center">
+  <h3 class="margin">JARVIS</h3>
+  <img src="JarvisMarch.gif"  style="display:inline" alt="Bird" width="350" height="350">
+  <p>Jarvis’s march algorithm uses a process called gift wrapping to find the convex hull.In Jarvis’s march, we find
+    the bottommost point first.Then we go on adding righmost from the previos point in a clockwise manner. </p>
+</div>
+
+<!-- Fourth Container -->
+<div class="container-fluid bg-4 text-center">
+  <h3 class="margin">KIRKPATRICK SEIDEL</h3>
+  <img src="KPS.gif"  style="display:inline" alt="Bird" width="350" height="350">
+  <p>The Kirkpatrick–Seidel algorithm, called by its authors "the ultimate planar convex hull algorithm",
+    is a divide and conquer algorithm for computing the convex hull of a set of points in the plane. THe algorithm uses
+  a variation of divide and conquer called prune and search to find the convex hull. </p>
+</div>
+
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-5 text-center">
+  <h3 class="margin">Performance Graphs</h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+
+    </div>
+    <div class="col-sm-4">
+      <img src="final_fig.png" class="img-responsive margin"  width="500" height="500" alt="Image">
+      <p>The above graph shows the performance of each convex hull algorithm. THe graph plots the time taken
+       by each algorithm to run for a given number of points.</p>
+       <br><br>
+       <p>From the above graph it can be seen that all the three algorithms perform the same upto 50000 points.
+       Above 50,000 points GrahamScan scan and Kirkpatrick Seidel work much better than JarvisMarch.</p>
+    </div>
+    <div class="col-sm-4">
+      <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <img src="birds3.jpg" class="img-responsive margin" style="width:100%" alt="Image"> -->
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<!-- <footer class="container-fluid bg-6 text-center">
+  <p>Bootstrap Theme Made By <a href="https://www.w3schools.com">www.w3schools.com</a></p>
+</footer> -->
+
+</body>
+</html>
