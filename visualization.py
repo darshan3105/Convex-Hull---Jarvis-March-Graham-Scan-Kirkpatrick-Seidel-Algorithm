@@ -210,7 +210,7 @@ elif type == 'k':
     while i < len(x_hull):
         plt.plot(x_hull[i:i+2],y_hull[i:i+2],linewidth = 2,color = 'green',alpha = 0.6)
         # plt.savefig('fig/foo'+str(i)+'.png')
-        plt.pause(0.05)
+        plt.pause(0.3)
         i+=2
 
     plt.show()
