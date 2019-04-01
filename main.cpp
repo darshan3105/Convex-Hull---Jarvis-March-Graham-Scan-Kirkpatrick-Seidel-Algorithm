@@ -16,9 +16,11 @@ int main(){
     time_t time1,time2;
     List<Point> points = make_list("datasets/points.csv");
     jm.fit_set(points);
-
+    time1 = time(NULL);
     List<Point> hull = jm.compute_hull();
-    hull.print();
+    time2 = time(NULL);
+    hull.print();cout<<endl;
+    cout<<"time :"<<time2-time1<<endl;
     cout<<endl;
 
 }

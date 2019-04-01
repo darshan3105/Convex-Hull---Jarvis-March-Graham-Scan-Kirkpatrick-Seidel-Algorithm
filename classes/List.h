@@ -26,7 +26,7 @@ class List{
       }
       /** Contructor.
         * It creates a list with capacity equal to the capacity passed as an argument.
-        * @param capacity of type integer. 
+        * @param capacity of type integer.
        */
       List<T>(int capacity){
         arr = new T[capacity];

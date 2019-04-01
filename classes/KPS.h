@@ -128,8 +128,8 @@ class KPS{
           sort(points->begin(),points->end(),[](Point a,Point b){ return a.get_X() < b.get_X();});
 
 
-          List<Point> candidates;
-          List<Pair<Point,Point> > pairs;
+          List<Point> candidates(points->size());
+          List<Pair<Point,Point> > pairs(points->size()/2 +1);
           if(points->size()%2==0){
             for(int i=0;i<points->size();i+=2){
               Point first_pt = points->get(i);
@@ -190,7 +190,10 @@ class KPS{
           else
             median_slope = kthSmallest(arr,0,len-1,(len+1)/2);
 
-          List<Pair<Point,Point> > SMALL,EQUAL,LARGE;
+          List<Pair<Point,Point> > SMALL(pairs.size());
+          List<Pair<Point,Point> > EQUAL(pairs.size());
+          List<Pair<Point,Point> > LARGE(pairs.size());
+
           for(int i=0;i<pairs.size();i++){
             Point p1= pairs.get(i).get_first();
             Point p2 = pairs.get(i).get_second();
@@ -297,8 +300,8 @@ class KPS{
 
           sort(points->begin(),points->end(),[](Point a,Point b){ return a.get_X() < b.get_X();});
 
-          List<Point> candidates;
-          List<Pair<Point,Point> > pairs;
+          List<Point> candidates(points->size());
+          List<Pair<Point,Point> > pairs(points->size()/2 +1);
           if(points->size()%2==0){
             for(int i=0;i<points->size();i+=2){
               Point first_pt = points->get(i);
@@ -361,7 +364,10 @@ class KPS{
             median_slope = kthSmallest(arr,0,len-1,(len+1)/2);
 
 
-          List<Pair<Point,Point> > SMALL,EQUAL,LARGE;
+          List<Pair<Point,Point> > SMALL(pairs.size());
+          List<Pair<Point,Point> > EQUAL(pairs.size());
+          List<Pair<Point,Point> > LARGE(pairs.size());
+
           for(int i=0;i<pairs.size();i++){
             Point p1= pairs.get(i).get_first();
             Point p2 = pairs.get(i).get_second();
@@ -472,7 +478,7 @@ class KPS{
 
     List<Point> get_upper_hull(Point pmin,Point pmax,List<Point>* points){
 
-        List<Point> upper_hull;
+        List<Point> upper_hull(points->size());
         int n = points->size();
         double arr[n];
         for(int i=0;i<n;i++){
@@ -521,7 +527,7 @@ class KPS{
 
     List<Point> get_lower_hull(Point pmin,Point pmax,List<Point>* points){
 
-        List<Point> lower_hull;
+        List<Point> lower_hull(points->size());
         int n = points->size();
         double arr[n];
         for(int i=0;i<n;i++){
